@@ -14,6 +14,7 @@ spec:
     repoURL: https://github.com/javdet/argocd-lesson.git
     targetRevision: HEAD
   syncPolicy:
-    automated: {}
+    automated:
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
