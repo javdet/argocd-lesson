@@ -2,18 +2,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: helm-guestbook
+  name: root
   namespace: argocd
 spec:
   destination:
-    namespace: applications
+    namespace: argocd
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: helm-guestbook
+    path: demo-dev/apps
     repoURL: https://github.com/javdet/argocd-lesson.git
     targetRevision: HEAD
   syncPolicy:
-    automated: {}
-    syncOptions:
-      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+

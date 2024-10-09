@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: my-project
+  namespace: argocd
+spec:
+  description: "My project"
+  sourceRepos:
+    - https://github.com/your-username/your-repo.git  
+    - https://github.com/org/another-repo.git
+  destinations:
+    - namespace: dev
+      server: https://kubernetes.default.svc           
+    - namespace: prod
+      server: https://production.k8s.cluster.svc
+  clusterResourceWhitelist:                            
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:                    
+    - group: '*'
+      kind: '*'
+  roles:
+    - name: devops                            
+      description: "Devops team policies"
+      policies:
+        - p, proj:my-project:devops, applications, get, */*, allow
+        - p, proj:my-project:devops, applications, create, */*, allow
+        - p, proj:my-project:devops, applications, delete, */*, allow
+      groups:
+        - devops-team  

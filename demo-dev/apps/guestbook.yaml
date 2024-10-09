@@ -4,8 +4,6 @@ kind: Application
 metadata:
   name: guestbook
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: applications
@@ -18,4 +16,4 @@ spec:
   syncPolicy:
     automated: {}
     syncOptions:
-      - CreateNamesace=True
+      - CreateNamespace=true
